@@ -41,7 +41,8 @@ const FinanceApp = () => {
     categoria: 'Outros',
     metodoPagamento: 'Dinheiro',
     data: new Date().toISOString().split('T')[0],
-    comprovante: null
+    comprovante: null,
+    recorrente: null
   });
   
   const [formErrors, setFormErrors] = useState({});
@@ -108,7 +109,8 @@ const FinanceApp = () => {
       categoria: 'Outros',
       metodoPagamento: 'Dinheiro',
       data: new Date().toISOString().split('T')[0],
-      comprovante: null
+      comprovante: null,
+      recorrente: null
     });
     setFormErrors({});
     setShowModal(false);
@@ -342,6 +344,7 @@ const FinanceApp = () => {
                     <th className="p-4">Categoria</th>
                     <th className="p-4">Método</th>
                     <th className="p-4">Data</th>
+                    <th className="p-4">Recorrente</th>
                     <th className="p-4">Valor</th>
                     <th className="p-4">Ações</th>
                   </tr>
@@ -358,13 +361,14 @@ const FinanceApp = () => {
                       <td className="p-4 text-gray-400">{t.categoria}</td>
                       <td className="p-4 text-gray-400">{t.metodoPagamento}</td>
                       <td className="p-4 text-gray-400">{t.data}</td>
+                      <td className="p-4 text-gray-400">{t.recorrente ? t.recorrente.charAt(0).toUpperCase() + t.recorrente.slice(1) : '-'}</td>
                       <td className={`p-4 font-bold ${t.tipo === 'Depósito' ? 'text-green-500' : 'text-red-500'}`}>
                         {t.tipo === 'Depósito' ? '+' : '-'}R$ {t.valor.toFixed(2)}
                       </td>
                       <td className="p-4">
                         <div className="flex gap-2">
-                          <button onClick={() => { setEditingTransaction(t); setFormData({...t, valor: t.valor.toString(), comprovante: t.comprovante || null}); setShowModal(true); }} className="text-gray-500 hover:text-white"><Edit2 size={16}/></button>
-                          <button data-cy="delete-btn" onClick={() => handleDeleteTransaction(t.id)} className="text-gray-500 hover:text-red-500"><Trash2 size={16}/></button>
+                          <button data-cy={`edit-${t.nome.replace(/\s+/g, '-').toLowerCase()}`} onClick={() => { setEditingTransaction(t); setFormData({...t, valor: t.valor.toString(), comprovante: t.comprovante || null, recorrente: t.recorrente || null}); setShowModal(true); }} className="text-gray-500 hover:text-white"><Edit2 size={16}/></button>
+                          <button data-cy={`delete-${t.nome.replace(/\s+/g, '-').toLowerCase()}`} onClick={() => handleDeleteTransaction(t.id)} className="text-gray-500 hover:text-red-500"><Trash2 size={16}/></button>
                         </div>
                       </td>
                     </tr>
@@ -427,15 +431,30 @@ const FinanceApp = () => {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm mb-1 text-gray-400">Tipo</label>
-                  <select 
-                    data-cy="select-tipo"
-                    className="w-full bg-black border border-gray-700 rounded-lg p-3 outline-none"
-                    value={formData.tipo}
-                    onChange={e => setFormData({...formData, tipo: e.target.value})}
-                  >
-                    <option value="Despesa">Despesa</option>
-                    <option value="Depósito">Depósito</option>
-                  </select>
+                  <div className="space-y-2">
+                    <label className="flex items-center gap-2">
+                      <input 
+                        type="radio"
+                        name="tipo"
+                        value="Despesa"
+                        checked={formData.tipo === 'Despesa'}
+                        onChange={e => setFormData({...formData, tipo: e.target.value})}
+                        className="text-green-500"
+                      />
+                      Despesa
+                    </label>
+                    <label className="flex items-center gap-2">
+                      <input 
+                        type="radio"
+                        name="tipo"
+                        value="Depósito"
+                        checked={formData.tipo === 'Depósito'}
+                        onChange={e => setFormData({...formData, tipo: e.target.value})}
+                        className="text-green-500"
+                      />
+                      Depósito
+                    </label>
+                  </div>
                 </div>
                 <div>
                   <label className="block text-sm mb-1 text-gray-400">Categoria</label>
@@ -463,6 +482,32 @@ const FinanceApp = () => {
                   value={formData.data}
                   onChange={e => setFormData({...formData, data: e.target.value})}
                 />
+              </div>
+
+              <div>
+                <label className="block text-sm mb-2 text-gray-400">Recorrente</label>
+                <div className="flex gap-4">
+                  <label className="flex items-center gap-2">
+                    <input 
+                      data-cy="checkbox-mensal"
+                      type="checkbox"
+                      checked={formData.recorrente === 'mensal'}
+                      onChange={(e) => setFormData({...formData, recorrente: e.target.checked ? 'mensal' : null})}
+                      className="text-green-500"
+                    />
+                    Mensal
+                  </label>
+                  <label className="flex items-center gap-2">
+                    <input 
+                      data-cy="checkbox-semanal"
+                      type="checkbox"
+                      checked={formData.recorrente === 'semanal'}
+                      onChange={(e) => setFormData({...formData, recorrente: e.target.checked ? 'semanal' : null})}
+                      className="text-green-500"
+                    />
+                    Semanal
+                  </label>
+                </div>
               </div>
 
               <div>
