@@ -428,7 +428,24 @@ const FinanceApp = () => {
                 {formErrors.valor && <p data-cy="error-valor" className="text-red-500 text-xs mt-1">{formErrors.valor}</p>}
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div>
+                <div>
+                  <label className="block text-sm mb-1 text-gray-400">Categoria</label>
+                  <select 
+                    className="w-full bg-black border border-gray-700 rounded-lg p-3 outline-none"
+                    value={formData.categoria}
+                    onChange={e => setFormData({...formData, categoria: e.target.value})}
+                  >
+                    <option value="Outros">Outros</option>
+                    <option value="Transporte">Transporte</option>
+                    <option value="Alimentação">Alimentação</option>
+                    <option value="Moradia">Moradia</option>
+                    <option value="Saúde">Saúde</option>
+                    <option value="Lazer">Lazer</option>
+                    <option value="Renda">Renda</option>
+                  </select>
+                </div>
+              </div>
                 <div>
                   <label className="block text-sm mb-1 text-gray-400">Tipo</label>
                   <div className="space-y-2">
@@ -456,23 +473,7 @@ const FinanceApp = () => {
                     </label>
                   </div>
                 </div>
-                <div>
-                  <label className="block text-sm mb-1 text-gray-400">Categoria</label>
-                  <select 
-                    className="w-full bg-black border border-gray-700 rounded-lg p-3 outline-none"
-                    value={formData.categoria}
-                    onChange={e => setFormData({...formData, categoria: e.target.value})}
-                  >
-                    <option value="Outros">Outros</option>
-                    <option value="Transporte">Transporte</option>
-                    <option value="Alimentação">Alimentação</option>
-                    <option value="Moradia">Moradia</option>
-                    <option value="Saúde">Saúde</option>
-                    <option value="Lazer">Lazer</option>
-                    <option value="Renda">Renda</option>
-                  </select>
-                </div>
-              </div>
+                
 
               <div>
                 <label className="block text-sm mb-1 text-gray-400">Data</label>
