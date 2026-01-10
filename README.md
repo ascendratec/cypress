@@ -1,4 +1,4 @@
-# 🚀 Curso de Cypress – Ascendra Tecnologia
+# 🚀 Curso de Cypress – Ascendra
 
 Bem-vindo(a) ao repositório oficial do **Curso de Cypress da Ascendra**!  
 Este projeto foi criado para apoiar o aprendizado prático de **testes automatizados end-to-end (E2E)** utilizando o **Cypress**, uma das ferramentas mais modernas e eficientes para testes de aplicações web.
