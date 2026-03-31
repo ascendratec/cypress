@@ -1,0 +1,21 @@
+{
+  "name": "cypress",
+  "version": "1.0.0",
+  "description": "Bem-vindo(a) ao repositório oficial do **Curso de Cypress da Ascendra**!  \r Este projeto foi criado para apoiar o aprendizado prático de **testes automatizados end-to-end (E2E)** utilizando o **Cypress**, uma das ferramentas mais modernas e eficientes para testes de aplicações web.",
+  "main": "cypress.config.js",
+  "scripts": {
+    "cy:open": "cypress open",
+    "test": "cypress run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ascendratec/cypress.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ascendratec/cypress/issues"
+  },
+  "homepage": "https://github.com/ascendratec/cypress#readme"
+}
