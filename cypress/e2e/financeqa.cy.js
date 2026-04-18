@@ -1,5 +1,6 @@
 describe('Controle Financeiro', () => { // serve para um conjunto de teste
-  it('verifica o titulo da aplicação', () => {  // serve para um caso de teste
+  it('verifica o titulo da aplicação', () => { 
+    cy.viewport(1920, 1080) // serve para um caso de teste
     cy.visit('http://localhost:5173/')
     cy.url().should('include', 'localhost:5173/dash')
     cy.title().should('be.equal', "Finance QA")
